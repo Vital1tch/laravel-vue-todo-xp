@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +18,8 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::get('/',[IndexController::class,'index'])->name('Home');
-Route::get('/about',[IndexController::class,'about'])->name('About');
+Route::get('/',[HomeController::class,'index'])->name('Home');
 
-Route::resource('users',UserController::class);
 
 //Route::inertia('/about','About');
 //Route::inertia('users.index','Pages/Users/Index.vue');

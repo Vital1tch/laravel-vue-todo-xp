@@ -5,12 +5,12 @@
 </script>
 
 <template>
-    <div class="bg-gradient-to-r from-purple-header from-50% black-header via-100% to-cian-header to-100% w-4/5 m-auto mt-14 rounded-t-lg">
+    <div class="bg-gradient-to-r from-purple-header from-50% black-header via-100% to-cian-header to-100% w-4/5 m-auto mt-14 rounded-t-2xl">
 
         <header class="flex justify-between px-8 py-5">
 
             <div class="flex items-center">
-                <img src="/Photos/Logo.png" alt="Logo" class="w-13 mr-3" />
+                <img src="/public/Photos/Logo.png" alt="Logo" class="w-13 mr-3" />
                 <div>
                     <h2 class="text-3xl font-semibold text-white">Task sculptor</h2>
                     <p class="font-semibold-regular text-slate-500">Ваяй свою продуктивность</p>
@@ -40,7 +40,7 @@
     <div class="w-4/5 m-auto mt-6 px-6 flex items-center ">
 
         <div class="pb-10">
-            <img src="/Photos/avatar.png" alt="Avatar">
+            <img src="/public/Photos/avatar.png" alt="Avatar">
         </div>
 
         <div class="mb-16 ml-5 w-48 ">

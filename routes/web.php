@@ -20,6 +20,10 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/',[HomeController::class,'index'])->name('Home');
 
+Route::post('/tasks', [HomeController::class,'addTask']);
+
+
+
 
 //Route::inertia('/about','About');
 //Route::inertia('users.index','Pages/Users/Index.vue');

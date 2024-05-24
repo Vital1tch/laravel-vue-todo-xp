@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Habit extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','completion_count'];
 }

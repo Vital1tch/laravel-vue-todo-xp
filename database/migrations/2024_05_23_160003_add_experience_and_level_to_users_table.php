@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('habits', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('completion_count')->default(0);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('experience')->default(0);
+            $table->integer('level')->default(1);
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('habits');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('experience');
+            $table->dropColumn('level');
+        });
     }
 };

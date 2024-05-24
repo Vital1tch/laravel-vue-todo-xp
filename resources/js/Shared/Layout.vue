@@ -1,6 +1,59 @@
 <script>
-    export default {
 
+import { mapState, mapGetters } from 'vuex';
+import axios from 'axios';
+import { Link } from '@inertiajs/inertia-vue3'
+    export default {
+    props: {
+        tasks: {
+            type: Array,
+            required: true,
+        },
+        habits: {
+            type: Array,
+            required: true,
+        },
+        user: {
+            type: Object,
+            required: true,
+        }
+    },
+        components: {
+        Link,
+        },
+        computed: {
+            ...mapState(['experience', 'level']),
+            ...mapGetters(['nextLevelExperience', 'experiencePercentage'])
+        },
+
+        methods: {
+            resetProgress() {
+                axios.post('/reset-progress').then(() => {
+                    this.$store.commit('RESET_PROGRESS');
+                }).catch(error => {
+                    console.error('Error resetting progress:', error);
+                });
+            },
+            addExperienceForHabit(habitId) {
+                const experienceGained = 10; // Количество опыта за выполнение привычки
+                axios.post('/habits/add-experience', { habitId, experienceGained })
+                    .then(response => {
+                        this.$store.commit('SET_EXPERIENCE', response.data.experience);
+                        this.$store.commit('SET_LEVEL', response.data.level);
+                    })
+                    .catch(error => {
+                        console.error('Error adding experience:', error);
+                    });
+            }
+        },
+
+        mounted() {
+            // Получаем данные из сессии при загрузке компонента
+            axios.get('/api/user-progress').then(response => {
+                this.$store.commit('SET_EXPERIENCE', response.data.experience);
+                this.$store.commit('SET_LEVEL', response.data.level);
+            });
+        }
     }
 </script>
 
@@ -18,20 +71,12 @@
             </div>
 
             <ul class="flex items-center gap-14 text-white text-xl">
-                <li class="flex items-center gap-3 cursor-pointer hover:text-indigo-400">
-                    <b>Задачи</b>
+                <li class="flex items-center gap-3 mr-6 text-2xl font-semibold cursor-pointer hover:text-indigo-400">
+                    <a href="/" class="">Задачи</a>
                 </li>
 
-                <li class="flex items-center gap-3 cursor-pointer hover:text-indigo-400">
-                    <b>Инвентарь</b>
-                </li>
-
-                <li class="flex items-center gap-3 cursor-pointer hover:text-indigo-400">
-                    <b>Магазин</b>
-                </li>
-
-                <li class="flex items-center gap-3 cursor-pointer hover:text-indigo-400">
-                    <b>О нас</b>
+                <li class="flex items-center gap-3 mr-4 text-2xl font-semibold cursor-pointer hover:text-indigo-400">
+                    <a href="/about" class="">О нас</a>
                 </li>
             </ul>
         </header>
@@ -49,9 +94,10 @@
             </div>
             <div class="flex items-center">
                 <div class="mr-10 text-white text-base pt-2 pb-2">
-                    <b>Уровень:</b>
-                    <div class="bg-blue-400 w-32 h-4 rounded-full overflow-hidden">
-                        <div class="bg-blue-4000 h-full"></div>
+                    <b>Уровень: {{level}}</b><br>
+                    <b class="">Опыт: {{experience}}/{{nextLevelExperience}}</b>
+                    <div class="bg-white w-32 h-4 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-purple-header from-20% black-header via-100% bg-blue-400 to-39%  h-full" :style="{width: experiencePercentage + '%'}"></div>
                     </div>
                 </div>
 

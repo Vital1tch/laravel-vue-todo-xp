@@ -12,6 +12,7 @@ export default {
             'black-header':'#1E1E1E',
             'cian-header':'#22294F',
             'bg-grey-custom':'#434343',
+            'purple-plus':'#250f22'
         }
     },
   },

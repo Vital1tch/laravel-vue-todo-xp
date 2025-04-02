@@ -23,7 +23,7 @@
 
 ---
 ## Превью
-![img.png](img.png)
+![img.png](public/Photos/img.png)
 ---
 ## Установка проекта
 ```bash
